@@ -1,2 +1,5 @@
 /Archives/
-/.DS_Store
+.*
+/Labs/**/out/
+
+!.gitignore
