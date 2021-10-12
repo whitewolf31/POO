@@ -28,4 +28,5 @@ then
 	display_error
 fi
 
+mkdir -p Archives
 zip -r "Archives/$1" "${@:2}"
