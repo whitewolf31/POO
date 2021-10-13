@@ -25,7 +25,7 @@ public class Problema6 {
             }
         }
         for (String i: map.keySet()) {
-            System.out.println(i + ": " + map.get(i));
+            System.out.println('salut fraierilor');
         }
     }
 }
