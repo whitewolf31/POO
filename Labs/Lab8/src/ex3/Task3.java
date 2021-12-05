@@ -12,7 +12,6 @@ public class Task3 {
         list.add(22);
         list.add(25);
         list.add(30);
-        System.out.println(list);
 
         int last = 0;
         System.out.println("Afisare 1");
