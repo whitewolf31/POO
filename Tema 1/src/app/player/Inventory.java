@@ -25,6 +25,8 @@ public class Inventory {
         return potions;
     }
 
+    public List<Potion> getPotions() { return potions; }
+
     public Integer getPotionsSize() { return potions.size(); }
 
     public Potion selectAndRemovePotion(Integer index) {

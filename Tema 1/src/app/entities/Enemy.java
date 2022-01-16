@@ -8,11 +8,12 @@ import app.player.Spell;
 import app.player.spell.Earth;
 import app.player.spell.Fire;
 import app.player.spell.Ice;
+import app.shared.Logger;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Enemy<T extends Entity> extends Entity implements CellElement {
+public class Enemy extends Entity implements CellElement {
 
     public Enemy() {
         super();
@@ -38,13 +39,10 @@ public class Enemy<T extends Entity> extends Entity implements CellElement {
 
     @Override
     public void receiveDamage(Integer damage) {
-        Boolean rand = new Random().nextBoolean();
-        if (!rand) {
-            currentHP -= damage;
-            if (currentHP < 0) currentHP = 0;
-            System.out.println("Enemy has received " + damage + " damage points. HP left: " + currentHP);
-        }
-        else System.out.println("Enemy has ducked and you missed!");
+        // Eliminated 50% chance to duck since it's way too op
+        currentHP -= damage;
+        if (currentHP < 0) currentHP = 0;
+        Logger.getInstance().logMessage("Enemy has received " + damage + " damage points. HP left: " + currentHP, true);
     }
 
     @Override

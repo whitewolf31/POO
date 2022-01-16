@@ -8,13 +8,14 @@ import app.types.CellEnum;
 import app.types.DirectionEnum;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Grid extends ArrayList<ArrayList<Cell>> {
     private Character player;
 
     private Cell currentCell;
 
-    private Grid(Integer length, Integer width, Character player) {
+    private Grid(Integer length, Integer width, Character player, boolean isHardCoded) {
         this.player = player;
         for (int i = 0; i < length; i++) {
             ArrayList<Cell> currentRow = new ArrayList<Cell>();
@@ -24,7 +25,35 @@ public class Grid extends ArrayList<ArrayList<Cell>> {
             }
         }
         currentCell = get(0).get(0);
-        generateHardcoded();
+        if (isHardCoded) generateHardcoded();
+        else {
+            Random rand = new Random();
+            int numOfShops = rand.nextInt(2) + 2;
+            int numOfEnemies = rand.nextInt(2) + 1;
+            int i = 0;
+            for (i = 0; i < numOfShops; i++) {
+                int xCoord, yCoord;
+                do {
+                    xCoord = rand.nextInt(length);
+                    yCoord = rand.nextInt(width);
+                } while (get(xCoord).get(yCoord).getType() != CellEnum.EMPTY);
+                get(xCoord).get(yCoord).setCellElement(new Shop(), CellEnum.SHOP);
+            }
+            for (i = 0; i < numOfEnemies; i++) {
+                int xCoord, yCoord;
+                do {
+                    xCoord = rand.nextInt(length);
+                    yCoord = rand.nextInt(width);
+                } while (get(xCoord).get(yCoord).getType() != CellEnum.EMPTY);
+                get(xCoord).get(yCoord).setCellElement(new Enemy(), CellEnum.ENEMY);
+            }
+            int xCoord, yCoord;
+            do {
+                xCoord = rand.nextInt(length);
+                yCoord = rand.nextInt(width);
+            } while (get(xCoord).get(yCoord).getType() != CellEnum.EMPTY);
+            get(xCoord).get(yCoord).setType(CellEnum.FINISH);
+        }
     }
 
     private void generateHardcoded() {
@@ -47,8 +76,8 @@ public class Grid extends ArrayList<ArrayList<Cell>> {
 
     public Character getPlayer() { return player; }
 
-    public static Grid generateGrid(Integer length, Integer width, Character player) {
-        return new Grid(length, width, player);
+    public static Grid generateGrid(Integer length, Integer width, Character player, boolean isHardCoded) {
+        return new Grid(length, width, player, isHardCoded);
     }
 
     public Boolean navigate(DirectionEnum direction) {

@@ -13,8 +13,10 @@ import app.player.spell.Earth;
 import app.player.spell.Fire;
 import app.player.spell.Ice;
 import app.shared.Coords;
+import app.shared.Logger;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public abstract class Character extends Entity {
@@ -72,8 +74,16 @@ public abstract class Character extends Entity {
 
     public Integer getSpellsSize() { return spells.size(); }
 
+    public Integer getCurrentLevel() { return currentLevel; }
+
+    public Integer getCurrentXp() { return currentXp; }
+
     public void addToCurrentXp(Integer xpToAdd) {
         currentXp += xpToAdd;
+    }
+
+    public void setCurrentHP(int value) {
+        currentHP = value; // Used for hardcode mode
     }
 
     @Override
@@ -95,8 +105,8 @@ public abstract class Character extends Entity {
         currentHP -= damage;
         if (currentHP < 0) currentHP = 0;
 
-        if (damage == 0) System.out.println("You being powerful, received no damage!");
-        else System.out.println("You received " + damage + " damage. HP left: " + currentHP);
+        if (damage == 0) Logger.getInstance().logMessage("You being powerful, received no damage!", true);
+        else Logger.getInstance().logMessage("You received " + damage + " damage. HP left: " + currentHP, true);
     }
 
     @Override

@@ -63,9 +63,15 @@ public abstract class Entity implements Element {
 
     public Integer getSpellListSize() { return spells.size(); }
 
+    public List<Spell> getSpellList() { return spells; }
+
     public Integer getCurrentHP() { return currentHP; }
 
+    public Integer getMaxHP() { return maxHP; }
+
     public Integer getCurrentMana() { return currentMana; }
+
+    public Integer getMaxMana() { return maxMana; }
 
     public void useSpell(Spell spell, Entity enemy) {
         spells.remove(spell);

@@ -2,6 +2,9 @@ package app.player.inventory.potion;
 
 import app.entities.Character;
 import app.player.inventory.Potion;
+import app.shared.Logger;
+
+import java.awt.*;
 
 public class ManaPotion implements Potion {
     private Integer price;
@@ -19,6 +22,7 @@ public class ManaPotion implements Potion {
     @Override
     public void usePotion(Character player) {
         player.regenMana(regenValue);
+        Logger.getInstance().logMessage("You regenerated " + regenValue + " mana points", true, Color.BLUE);
     }
 
     @Override

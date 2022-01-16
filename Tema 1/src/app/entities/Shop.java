@@ -17,9 +17,19 @@ public class Shop implements CellElement {
         Random rand = new Random();
         Integer numOfPotions = rand.nextInt(2) + 2;
         potionList = new ArrayList<Potion>();
-        for (int i = 0; i < numOfPotions; i++) {
+        Integer potionType = rand.nextInt(3);
+        // Add at least 1 health potion and one mana potion
+        if (potionType == 0) potionList.add(new HealthPotion(PotionConsts.LOWCOST, PotionConsts.LOWREGEN, PotionConsts.LOWWEIGHT));
+        else if (potionType == 1) potionList.add(new HealthPotion(PotionConsts.MEDCOST, PotionConsts.MEDREGEN, PotionConsts.MEDWEIGHT));
+        else potionList.add(new HealthPotion(PotionConsts.HIGHCOST, PotionConsts.HIGHREGEN, PotionConsts.HIGHWEIGHT));
+        potionType = rand.nextInt(3);
+        if (potionType == 0) potionList.add(new ManaPotion(PotionConsts.LOWCOST, PotionConsts.LOWREGEN, PotionConsts.LOWWEIGHT));
+        else if (potionType == 1) potionList.add(new ManaPotion(PotionConsts.MEDCOST, PotionConsts.MEDREGEN, PotionConsts.MEDWEIGHT));
+        else potionList.add(new ManaPotion(PotionConsts.HIGHCOST, PotionConsts.HIGHREGEN, PotionConsts.HIGHWEIGHT));
+
+        for (int i = 0; i < numOfPotions - 2; i++) {
             Boolean isHealthPotion = rand.nextBoolean();
-            Integer potionType = rand.nextInt(3);
+            potionType = rand.nextInt(3);
 
             if (isHealthPotion) {
                 if (potionType == 0) potionList.add(new HealthPotion(PotionConsts.LOWCOST, PotionConsts.LOWREGEN, PotionConsts.LOWWEIGHT));
@@ -36,6 +46,8 @@ public class Shop implements CellElement {
     public Integer getNumberOfPotions() { return potionList.size(); }
 
     public Potion getPotionByIndex(Integer idx) { return potionList.get(idx); }
+
+    public List<Potion> getPotionList() { return potionList; }
 
     @Override
     public String toCharacter() {
