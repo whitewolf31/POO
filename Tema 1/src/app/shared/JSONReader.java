@@ -3,7 +3,6 @@ package app.shared;
 import app.auth.Account;
 import app.auth.Credentials;
 import app.auth.builders.InformationBuilder;
-import app.core.Cell;
 import app.core.Entity;
 import app.entities.factories.CharacterFactory;
 import app.types.CellEnum;
